@@ -39,19 +39,17 @@ sphinx==5.0.2
     #   sphinxcontrib-jquery
 sphinx-rtd-theme==2.0.0
     # via -r docs/requirements.in
-sphinxcontrib-applehelp==1.0.8
+sphinxcontrib-applehelp==1.0.2
     # via sphinx
-sphinxcontrib-devhelp==1.0.6
+sphinxcontrib-devhelp==1.0.2
     # via sphinx
-sphinxcontrib-htmlhelp==2.0.5
+sphinxcontrib-htmlhelp==2.0.0
     # via sphinx
-sphinxcontrib-jquery==4.1
-    # via sphinx-rtd-theme
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
-sphinxcontrib-qthelp==1.0.7
+sphinxcontrib-qthelp==1.0.3
     # via sphinx
-sphinxcontrib-serializinghtml==1.1.10
+sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-urllib3==2.2.1
+urllib3==1.26.9
     # via requests
