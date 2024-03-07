@@ -1,0 +1,8 @@
+{
+    "terminal.integrated.env.windows":
+    {
+        "PATH": "${env:HOME}/zephyrproject/zephyr/scripts;${env:PATH}",
+        "ZEPHYR_BASE": "${env:HOME}/zephyrproject/zephyr"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
