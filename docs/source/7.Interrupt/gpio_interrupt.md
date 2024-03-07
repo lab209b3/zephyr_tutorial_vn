@@ -12,12 +12,7 @@ $$
 ## Tóm tắt phần cứng
 Board phát triển được sử dụng làm ví dụ là STM32F746G Discovery:
 
-<style>
-table {
-    font-family: "Arial", monospace;
-    width: 1000px;
-}
-</style>
+
 
 | NSX | BOARD          | Kernel       |
 |----|-------------------|-------------------|
