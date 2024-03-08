@@ -1,0 +1,8 @@
+{
+    "cortex-debug.openocdPath": "C:/msys64/mingw64/bin",
+    "terminal.integrated.env.windows": 
+    {
+        "PATH": "C:/Users/DELL/zephyrproject/zephyr/scripts;${env:PATH}",
+        "ZEPHYR_BASE": "C:/Users/DELL/zephyrproject/zephyr"
+    }
+}
