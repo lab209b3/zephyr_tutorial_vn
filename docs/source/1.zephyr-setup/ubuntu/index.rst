@@ -124,7 +124,7 @@ Bước 4: Build một project sample
 
 -   Chọn Board để build:
 
-**Các board mà zephyr hổ trở:** `Supported Boards <https://docs.zephyrproject.org/latest/boards/index.html#boards>`_.
+**Các board mà zephyr hổ trợ:** `Supported Boards <https://docs.zephyrproject.org/latest/boards/index.html#boards>`_.
 
 .. code-block:: bash
 

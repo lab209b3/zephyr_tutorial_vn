@@ -16,5 +16,5 @@ Lựa chọn OS cài đặt
 .. toctree::
    :maxdepth: 1
 
-   ubuntu.rst
-   window.rst
+   ubuntu/index.rst
+   window/index.rst
