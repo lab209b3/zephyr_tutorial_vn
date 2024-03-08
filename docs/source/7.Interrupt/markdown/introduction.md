@@ -46,7 +46,7 @@ $$
 > **B.** Trong Zephyr, hầu hết các API của Kernel chỉ có thể được sử dụng trong Thread, không thể sử dụng trong ISR (Interrupt Service Routine). Tuy nhiên, những API Kernel có thể được sử dụng trong ISR thường có thuộc tính là **`isr_ok`**. Điều này giúp người phát triển nhận biết được những API nào có thể an toàn để sử dụng trong ngữ cảnh của ISR, đồng thời giảm thiểu nguy cơ lỗi và tăng tính ổn định của hệ thống.
 > Trong trường hợp một thường trình có thể được gọi bởi cả Thread và ISR, kernel cung cấp hàm **`k_is_in_isr()`** để cho phép thường trình thay đổi hành vi của nó tùy thuộc vào việc nó đang thực thi như một phần của Thread hay là một phần của ISR.
 
-![k_is_in_isr](./images/k_is_ok.png)
+![k_is_in_isr](../images/k_is_ok.png)
 ## Các loại Ngắt trong Zephyr
 
 1. ISR Thông Thường:
@@ -78,7 +78,7 @@ Sau các loại Ngắt, kế đến là một khái niệm khá mới được Z
 
 >Dưới đây là Logic việc đăng ký dịch vụ ngắt
 
-![hw_table](./images/hw_table.png)
+![hw_table](../images/hw_table.png)
 
 ## Ngắt Thông thường - Regular Interrupt
 - **Ngắt Thông thường được tạo ngay khi biên dịch chương trình**

@@ -18,7 +18,7 @@ Board phát triển được sử dụng làm ví dụ là STM32F746G Discovery:
 |----|-------------------|-------------------|
 | ST | STM32F746G_DISCO | CORTEX-M7 |
 
-![hw_table](./images/cortex.png)
+![hw_table](../images/cortex.png)
 
 Bộ điều khiển ngắt:
 
@@ -48,7 +48,7 @@ Và sau đó để kích hoạt, cần sử dụng các Lệnh:
 ## Tổng quan về GPIO
 - Zephyr Sử dụng `.dts`, một kiểu Device Tree tương tự như các OS nhân Linux để đóng gói và quản lý các phần cứng cấp thấp. Hầu như các phần cứng cấp thấp đều khó có thể tiếp cận bởi lớp trên. Từ đó, Zephyr cung cấp các API để dễ dàng giao tiếp với các phần cứng cấp thấp này, giúp việc phát triển trở nên đơn giản hơn.
 - Nếu chúng ta muốn thực hiện tạo Ngắt GPIO, trước tiên chúng ta cần phải biết tên GPIO, không phải là địa chỉ. Với Flow đơn thuần, chúng ta phải thông qua GPIO để lấy địa chỉ và cấu hình các thanh ghi chức năng trong đó, nhưng với Zephyr, chỉ cần thông qua tên GPIO đã được khai báo trong `.dts` kèm theo các API là chúng ta đã có thể cấu hình được.
-![hw_table](./images/gpio.png)
+![hw_table](../images/gpio.png)
 
 - Còn việc tạo Ngắt, khai báo Ngắt, không khác gì so với Flow như bình thường: 
 `Cấu hình thanh ghi GPIO →  Kích hoạt Ngắt.`
