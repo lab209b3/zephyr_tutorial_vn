@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations":
+    [
+        {
+            "name": "STM32Debug",
+            "device": "STM32F746G_Disco",
+            "gdbPath": "${env:HOME}/zephyr-sdk-${env:ZEPHYR_SDK_VERSION}/arm-zephyr-eabi/bin/arm-zephyr-eabi-gdb",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/zephyr/zephyr.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "interface": "swd",
+            "configFiles":["${env:HOME}/zephyrproject/zephyr/boards/arm/stm32f746g_disco/support/openocd.cfg"],
+            "runToEntryPoint": "main",
+            "postRestartCommands": [
+                "break main",
+                "continue"
+            ]
+        }
+    ]
+}

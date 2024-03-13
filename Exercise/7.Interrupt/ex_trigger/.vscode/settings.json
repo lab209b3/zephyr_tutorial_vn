@@ -1,0 +1,7 @@
+{
+    "terminal.integrated.env.windows":
+    {
+        "PATH": "${env:HOME}/zephyrproject/zephyr/scripts;${env:PATH}",
+        "ZEPHYR_BASE": "${env:HOME}/zephyrprojec/zephyr"
+    }
+}
