@@ -1,4 +1,4 @@
-Giới thiệu
+Cấu hình board cho sử dụng GPIO
 ==========
 
 Trong phần này chúng ta sẽ tìm hiểu về GPIO cơ bản:
@@ -6,9 +6,10 @@ Trong phần này chúng ta sẽ tìm hiểu về GPIO cơ bản:
     * Thiết lập chân output
     * Thiết lập chân ngắt
 
+.. contents::
+    :local:
+    :depth: 2
 
-Cài đặt GPIO
-============
 1.Tạo project
 ~~~~~~~~~~~~~
 

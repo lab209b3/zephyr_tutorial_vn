@@ -1,6 +1,10 @@
 DEBUG
 =====
 
+.. contents::
+    :local:
+    :depth: 2
+
 1.Cài đặt compiler cho stm32
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
