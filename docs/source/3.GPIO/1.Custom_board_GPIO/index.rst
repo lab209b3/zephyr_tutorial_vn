@@ -66,7 +66,7 @@ Ta có:
     ``GPIO_ACTIVE_LOW`` đơn giản chỉ là một cờ để chỉ định rằng chân GPIO được coi là "active" khi ở trạng thái logic thấp.
 
 3.Đặt tên cho các nút GPIO
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Vào main.c xóa và chỉ để lại những dòng sau:
 
