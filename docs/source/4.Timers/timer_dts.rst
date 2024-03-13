@@ -66,7 +66,7 @@ Device tree for timer
 
 Đoạn code dưới đây là một ví dụ cho việc viết device tree cho TIM2, với chức năng là PWM
 
-.. code-block:: c
+.. code-block:: console
    
    &timers2 {
       status = "okay";
@@ -80,7 +80,8 @@ Device tree for timer
 
 Tương tự với ví dụ với TIM3, với presclaer = 10000, PWM tại PB4
 
-.. code-block:: c
+.. code-block:: console
+   
    &timers3 {
       st,prescaler = <10000>;
       status = "okay";
@@ -94,4 +95,14 @@ Tương tự với ví dụ với TIM3, với presclaer = 10000, PWM tại PB4
 
 Config timer in Kconfig
 -----------------------
+
+.. code-block:: 
+   
+   CONFIG_PWM=y
+
+   CONFIG_LED=y
+
+   CONFIG_STDOUT_CONSOLE=y
+   CONFIG_PRINTK=y
+   CONFIG_LOG=y
 
