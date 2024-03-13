@@ -45,7 +45,11 @@ Building and Running
    Connection -> Modbus TCP/IP
    Remote Server -> IP Address  = 192.168.1.220, Port = 502
 
-  
+.. image:: img/img2.png
+  :width: 400
+  :align: center
+
+
 ---------------------------------------------------------------------------
 Đọc/ghi Coil
 ---------------------------------------------------------------------------
@@ -64,6 +68,15 @@ Building and Running
      - Ghi trạng thái 1 coil 
    * - 0x0F
      - Ghi trạng thái nhiều coil 
+
+.. code-block:: bash
+
+   Setup -> Read/Write Definition
+   Slave ID -> 1
+
+.. image:: img/img4.png
+  :width: 400
+  :align: center
 
 
 ---------------------------------------------------------------------------
@@ -85,13 +98,14 @@ Building and Running
    * - 0x10
      - Ghi giá trị nhiều thanh ghi
 
+.. code-block:: bash
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   Setup -> Read/Write Definition
+   Slave ID -> 1
 
-Kết hợp với màn hình và LVGH
-============================
+.. image:: img/img3.png
+  :width: 400
+  :align: center
 
 ---------------------------------------------------------------------------
 Tài liệu tham khảo:
