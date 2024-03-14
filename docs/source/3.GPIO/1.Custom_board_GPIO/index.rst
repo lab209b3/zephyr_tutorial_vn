@@ -82,7 +82,7 @@ thiết lập các #define cho led và button để tiện sử dụng sau này.
     #define BUTTON0_NODE DT_ALIAS(sw0)
     
 4.Lấy thông tin cấu hình GPIO(số chân GPIO, cấu hình pull-up,pull-down,v.v..)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: C
 
@@ -91,7 +91,7 @@ thiết lập các #define cho led và button để tiện sử dụng sau này.
     static const struct gpio_dt_spec button = GPIO_DT_SPEC_GET_OR(BUTTON0_NODE, gpios, {0});
 
 5.Cấu hình GPIO(input/output)
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: C
 
@@ -105,7 +105,7 @@ thiết lập các #define cho led và button để tiện sử dụng sau này.
    
 
 6.Các hàm trong GPIO
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 * Set 
 
