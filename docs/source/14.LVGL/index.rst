@@ -164,8 +164,14 @@ Ví dụ:
    function ``event_handler(lv_event_t * e)`` thì đây là một event sẽ xảy ra và được gọi ra xử lí nếu có 
    tác động tới đối tượng đó trên màn hình, cụ thể ở đây là nút nhấn nên bạn không cần gọi function này ra.
 
-   Cuối cùng là build, flash và xem thành quả.
+   Cuối cùng biên dịch chương trình và nạp ta được kết quả:
+   
+   .. image:: images/ex_btn.jpg
+      :align: center
+      :scale: 40%
 
+   |br|
+   
    .. note:: Lưu ý: Đối với các biến đối tượng ``lv_obj_t`` bạn nên khai báo dạng biến toàn cục, 
       vì có những trường hợp bạn cần lấy tham số thuộc đối tượng đó tại một event khác hoặc một đối tượng khác nào đó.
 
@@ -188,6 +194,13 @@ Ví dụ:
 
    Với biến ``logo_img`` là tên file được đặt và convert ở bước trên. Tên file đầy đủ khi convert xong là ``logo_img.c``
 
+   Biên dịch và nạp chương trình ta được kết quả:
+
+   .. image:: images/ex_img.jpg
+      :align: center
+      :scale: 40%
+
+
 .. note::
    Lưu ý: Ví dụ trên chỉ hướng dẫn sử dụng cho những mẫu có sẵn trên github. Để có thể tự tạo những đối tượng theo 
    ý mình, bạn cần tham khảo các mẫu có sẵn kết hợp nguồn có trong mục ``/src`` cùng với sự nhuần nhuyễn 
@@ -197,6 +210,8 @@ Ví dụ:
 
 Sử dụng công cụ hỗ trợ SquareLine Studio:
 --------------------------------------------------------------------
+
+   Công cụ này được sử dụng để hỗ trợ bạn trong quá trình tự custom project của mình như trích xuất các đoạn chương trình giao diện hoặc hiệu ứng... từ project SquareLine mà bạn đã Export.
 
 - **Bước 1:** Cài đặt phần mềm SquareLine Studio.
 - **Bước 2:** Sử dụng SquareLine Studio
@@ -250,24 +265,9 @@ Sử dụng SquareLine Studio:
 
 
 
+.. |br| raw:: html
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   <br />
 
 Tài liệu tham khảo:
 ====================================================================
