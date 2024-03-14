@@ -1,5 +1,5 @@
 Cấu hình board cho sử dụng GPIO
-==========
+===============================
 
 Trong phần này chúng ta sẽ tìm hiểu về GPIO cơ bản:
     * Thiết lập chân input
@@ -26,7 +26,7 @@ thêm vào ``set (BOARD stm32_min_dev_blue)`` theo thứ tự dưới đây. Lú
 
 
 2.Cấu hình GPIO sử dụng app.overlay
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Device tree (DTS) được sử dụng để mô tả phần cứng của bo mạch. Ta có thể dùng ``led pc13`` trên board. 
 Nhưng ở đây ta sẽ cấu hình một led mới.
