@@ -113,6 +113,7 @@ Các thư viện phải include:
 
     #include <sys/_stdint.h>
     #include <zephyr/device.h>
+    #include <zephyr/kernel.h>
     #include <zephyr/drivers/i2c.h>
 
 Đầu tiên, chúng ta sẽ nạp các giá trị của i2c target trong ``app.overlay`` vào
@@ -236,7 +237,7 @@ Hàm ``i2c_write`` nhận các param sau:
 * ``num_bytes``: Số bytes phải truyền.
 * ``addr``: Địa chỉ I2C dữ liệu ``uint16_t``.
 
-4. Bài tập
+2. Bài tập
 ==========
 
 .. toctree::
