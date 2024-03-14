@@ -133,7 +133,7 @@ Bước 4: Giải thích các folder chính có trong project
 *   ``app``: Chứa file *main.c*. folder này có chức năng chính dùng để build project (do có file CMakeLists.txt để 
     liên kết với các thư viện của zephyr).
 
-Bước 5: Một số custom cở bản cho project
+Bước 5: Các tham số cơ bản cho một project
 -------------------------------------------------------------------------------
 
 Chỉnh sửa lại tên project
