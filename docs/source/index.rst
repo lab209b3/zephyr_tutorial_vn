@@ -22,22 +22,9 @@ Welcome to zephyr_tutorial's documentation!
    10.Mutex/index.rst
    12.Device-tree/index.rst
    13.Boot-process/index.rst
-
-
-
-
-   1.zephyr-setup/index.rst
-   2.introduction/index.rst
-   3.GPIO/index.rst
-   4.Timers/index.rst
-   5.UART/index.rst
-   6.I2C/index.rst
-   7.Interrupt/index.rst
-   8.Thread/index.rst
-   9.Scheduling/index.rst
-   10.Mutex/index.rst
-   12.Device-tree/index.rst
-   13.Boot-process/index.rst
+   14.LVGL/index.rst
+   15.Modbus_TCP/index.rst
+   16.LVGL-SquareLine/index.rst
 
 Indices and tables
 ==================
