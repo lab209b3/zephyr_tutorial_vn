@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="vi" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thực hành &mdash; Tài liệu zephyr_tutorial </title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d3888072"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/translations.js?v=71464233"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Tìm Kiếm" href="../search.html" />
+    <link rel="next" title="Thread in Zephyr" href="../8.Thread/index.html" />
+    <link rel="prev" title="Các API thường gặp" href="command.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            zephyr_tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1.zephyr-setup/index.html">Cài đặt Zephyr cho máy tính</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.introduction/index.html">Giới thiệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.GPIO/index.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4.Timers/index.html">Lesson 4: Timers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.UART/index.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.I2C/index.html">I2C</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Giới thiệu về Ngắt - Interrupt</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#tong-quat">Tổng quát</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ngat-trong-zephyr-interrupt-api-zephyr">Ngắt trong Zephyr - Interrupt API Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#cac-loai-ngat-trong-zephyr">Các loại Ngắt trong Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#bang-vector-ngat-cua-zephyr">Bảng Vector Ngắt của Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ngat-thong-thuong-regular-interrupt">Ngắt Thông thường - Regular Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ngat-truc-tiep-direct-interrupt">Ngắt Trực tiếp - Direct Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ngat-co-do-tre-bang-0-zero-latency-interrupt">Ngắt có độ trễ bằng 0 - Zero Latency Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ung-dung-ngat-ngoai-vi-gpio">Ứng dụng - Ngắt Ngoại vi - GPIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ung-dung-ngat-timer">Ứng dụng - Ngắt Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ung-dung-ngat-uart">Ứng dụng - Ngắt UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#vo-hieu-hoa-mot-ngat">Vô hiệu hóa một Ngắt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#cac-api-thuong-gap">Các API thường gặp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#thuc-hanh">Thực hành</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#lien-ket">Liên kết</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gpio_interrupt.html">Ngắt Ngoại vi GPIO - External Interrupt GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart_interrupt.html">Ngắt UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timer_interrupt.html">Ngắt Timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command.html">Các API thường gặp</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Thực hành</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bang-vector-ngat-ex-vector">1. Bảng Vector Ngắt - ex_vector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kich-hoat-mot-ngat-ex-trigger">2. Kích hoạt một Ngắt - ex_trigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zero-latency-interrupt-ex-zerolatency">3. Zero Latency Interrupt - ex_zerolatency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ngat-gpio-ex-gpioisr">4. Ngắt GPIO - ex_gpioisr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ngat-uart-ex-uartisr">5. Ngắt UART - ex_uartisr</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../8.Thread/index.html">Thread in Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14.LVGL/index.html">LVGL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15.Modbus_TCP/index.html">Modbus - TCP/IP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16.LVGL-SquareLine/index.html">LVGL</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">zephyr_tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Giới thiệu về Ngắt - Interrupt</a></li>
+      <li class="breadcrumb-item active">Thực hành</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/7.Interrupt/exercise.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="thuc-hanh">
+<h1>Thực hành<a class="headerlink" href="#thuc-hanh" title="Link to this heading"></a></h1>
+<section id="bang-vector-ngat-ex-vector">
+<h2>1. Bảng Vector Ngắt - ex_vector<a class="headerlink" href="#bang-vector-ngat-ex-vector" title="Link to this heading"></a></h2>
+<p>Thử tạo Ngắt Thông thường hoặc Ngắt Trực tiếp. Sau đó xác nhận rằng Ngắt Thông thường hoặc Ngắt Trực tiếp có hay không xuất hiện trong file Config khi Compile, xuất hiện trong trình Debug.</p>
+<div class="admonition note">
+<p class="admonition-title">Ghi chú</p>
+<p>Device được đăng ký với mã là 25</p>
+</div>
+<p><strong>Đối với Ngắt Thông thường:</strong></p>
+<p><img alt="table" src="../_images/table.png" /></p>
+<p><strong>Đối với Ngắt Trực tiếp:</strong></p>
+<p><img alt="table2" src="../_images/table2.png" /></p>
+</section>
+<section id="kich-hoat-mot-ngat-ex-trigger">
+<h2>2. Kích hoạt một Ngắt - ex_trigger<a class="headerlink" href="#kich-hoat-mot-ngat-ex-trigger" title="Link to this heading"></a></h2>
+<p>Thông thường, các Ngắt của Zephyr đã được API hóa một cách chặt chẽ. Vậy nên muốn kích hoạt Ngắt của Zephyr phải đảm bảo thiết bị/ngoại vi rườm rà. Tuy nhiên, trong bài tập dưới đây, hàm <code class="docutils literal notranslate"><span class="pre">trigger_irq(isr_device_code)</span></code> sẽ được cung cấp, thuộc thư viện <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;interrupt_util.h&quot;</span></code>, với tác dụng giúp chúng ta kích hoạt ngắt để xem kết quả.</p>
+<div class="admonition note">
+<p class="admonition-title">Ghi chú</p>
+<p>Cho thư viện <code class="docutils literal notranslate"><span class="pre">interrupt_util.h</span></code></p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/*
+ * Copyright (c) 2018 Intel Corporation
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#ifndef INTERRUPT_UTIL_H_
+#define INTERRUPT_UTIL_H_
+
+#define MS_TO_US(ms)  (ms * USEC_PER_MSEC)
+
+#if defined(CONFIG_CPU_CORTEX_M)
+#include &lt;cmsis_core.h&gt;
+
+static inline uint32_t get_available_nvic_line(uint32_t initial_offset)
+{
+	int i;
+
+	for (i = initial_offset - 1; i &gt;= 0; i--) {
+
+		if (NVIC_GetEnableIRQ(i) == 0) {
+			/*
+			 * Interrupts configured statically with IRQ_CONNECT(.)
+			 * are automatically enabled. NVIC_GetEnableIRQ()
+			 * returning false, here, implies that the IRQ line is
+			 * either not implemented or it is not enabled, thus,
+			 * currently not in use by Zephyr.
+			 */
+
+			/* Set the NVIC line to pending. */
+			NVIC_SetPendingIRQ(i);
+
+			if (NVIC_GetPendingIRQ(i)) {
+				/*
+				 * If the NVIC line is pending, it is
+				 * guaranteed that it is implemented; clear the
+				 * line.
+				 */
+				NVIC_ClearPendingIRQ(i);
+
+				if (!NVIC_GetPendingIRQ(i)) {
+					/*
+					 * If the NVIC line can be successfully
+					 * un-pended, it is guaranteed that it
+					 * can be used for software interrupt
+					 * triggering. Return the NVIC line
+					 * number.
+					 */
+					break;
+				}
+			}
+		}
+	}
+
+	
+
+	return i;
+}
+
+static inline void trigger_irq(int irq)
+{
+	printk(&quot;Triggering irq : %d\n&quot;, irq);
+#if defined(CONFIG_SOC_TI_LM3S6965_QEMU) || defined(CONFIG_CPU_CORTEX_M0) \
+	|| defined(CONFIG_CPU_CORTEX_M0PLUS) || defined(CONFIG_CPU_CORTEX_M1)\
+	|| defined(CONFIG_ARMV6_M_ARMV8_M_BASELINE)
+	/* QEMU does not simulate the STIR register: this is a workaround */
+	NVIC_SetPendingIRQ(irq);
+#else
+	NVIC-&gt;STIR = irq;
+#endif
+}
+
+#elif defined(CONFIG_GIC)
+#include &lt;zephyr/drivers/interrupt_controller/gic.h&gt;
+#include &lt;zephyr/dt-bindings/interrupt-controller/arm-gic.h&gt;
+
+static inline void trigger_irq(int irq)
+{
+	printk(&quot;Triggering irq : %d\n&quot;, irq);
+
+	/* Ensure that the specified IRQ number is a valid SGI interrupt ID */
+	zassert_true(irq &lt;= 15, &quot;%u is not a valid SGI interrupt ID&quot;, irq);
+
+	/*
+	 * Generate a software generated interrupt and forward it to the
+	 * requesting CPU.
+	 */
+#if CONFIG_GIC_VER &lt;= 2
+	sys_write32(GICD_SGIR_TGTFILT_REQONLY | GICD_SGIR_SGIINTID(irq),
+		    GICD_SGIR);
+#else
+	uint64_t mpidr = GET_MPIDR();
+	uint8_t aff0 = MPIDR_AFFLVL(mpidr, 0);
+
+	gic_raise_sgi(irq, mpidr, BIT(aff0));
+#endif
+}
+
+#elif defined(CONFIG_ARC)
+static inline void trigger_irq(int irq)
+{
+	printk(&quot;Triggering irq : %d\n&quot;, irq);
+	z_arc_v2_aux_reg_write(_ARC_V2_AUX_IRQ_HINT, irq);
+}
+
+#elif defined(CONFIG_X86)
+
+#ifdef CONFIG_X2APIC
+#include &lt;zephyr/drivers/interrupt_controller/loapic.h&gt;
+#define VECTOR_MASK 0xFF
+#else
+#include &lt;zephyr/sys/arch_interface.h&gt;
+#define LOAPIC_ICR_IPI_TEST  0x00004000U
+#endif
+
+/*
+ * We can emulate the interrupt by sending the IPI to
+ * core itself by the LOAPIC for x86 platform.
+ *
+ * In APIC mode, Write LOAPIC&#39;s ICR to trigger IPI,
+ * the LOAPIC_ICR_IPI_TEST  0x00004000U means:
+ * Delivery Mode: Fixed
+ * Destination Mode: Physical
+ * Level: Assert
+ * Trigger Mode: Edge
+ * Destination Shorthand: No Shorthand
+ * Destination: depends on cpu_id
+ *
+ * In X2APIC mode, this no longer works. We emulate the
+ * interrupt by writing the IA32_X2APIC_SELF_IPI MSR
+ * to send IPI to the core itself via LOAPIC also.
+ * According to SDM vol.3 chapter 10.12.11, the bit[7:0]
+ * for setting the vector is only needed.
+ */
+static inline void trigger_irq(int vector)
+{
+	uint8_t i;
+
+#ifdef CONFIG_X2APIC
+	x86_write_x2apic(LOAPIC_SELF_IPI, ((VECTOR_MASK &amp; vector)));
+#else
+
+#ifdef CONFIG_SMP
+	int cpu_id = arch_curr_cpu()-&gt;id;
+#else
+	int cpu_id = 0;
+#endif
+	z_loapic_ipi(cpu_id, LOAPIC_ICR_IPI_TEST, vector);
+#endif /* CONFIG_X2APIC */
+
+	/*
+	 * add some nop operations here to cost some cycles to make sure
+	 * the IPI interrupt is handled before do our check.
+	 */
+	for (i = 0; i &lt; 10; i++) {
+		arch_nop();
+	}
+}
+
+#elif defined(CONFIG_ARCH_POSIX)
+#include &lt;zephyr/arch/posix/posix_soc_if.h&gt;
+
+static inline void trigger_irq(int irq)
+{
+	posix_sw_set_pending_IRQ(irq);
+}
+
+#elif defined(CONFIG_RISCV)
+#if defined(CONFIG_NUCLEI_ECLIC)
+void riscv_clic_irq_set_pending(uint32_t irq);
+static inline void trigger_irq(int irq)
+{
+	riscv_clic_irq_set_pending(irq);
+}
+#else
+static inline void trigger_irq(int irq)
+{
+	uint32_t mip;
+
+	__asm__ volatile (&quot;csrrs %0, mip, %1\n&quot;
+			  : &quot;=r&quot; (mip)
+			  : &quot;r&quot; (1 &lt;&lt; irq));
+}
+#endif
+#elif defined(CONFIG_XTENSA)
+static inline void trigger_irq(int irq)
+{
+	z_xt_set_intset(BIT((unsigned int)irq));
+}
+
+#elif defined(CONFIG_SPARC)
+extern void z_sparc_enter_irq(int);
+
+static inline void trigger_irq(int irq)
+{
+	z_sparc_enter_irq(irq);
+}
+
+#elif defined(CONFIG_MIPS)
+extern void z_mips_enter_irq(int);
+
+static inline void trigger_irq(int irq)
+{
+	z_mips_enter_irq(irq);
+}
+
+#elif defined(CONFIG_CPU_CORTEX_R5) &amp;&amp; defined(CONFIG_VIM)
+
+extern void z_vim_arm_enter_irq(int);
+
+static inline void trigger_irq(int irq)
+{
+	z_vim_arm_enter_irq(irq);
+}
+
+#else
+/* So far, Nios II does not support this */
+#define NO_TRIGGER_FROM_SW
+#endif
+
+#endif /* INTERRUPT_UTIL_H_ */
+</pre></div>
+</div>
+<p><strong>Viết chương trình, mỗi giây tăng giá trị biến đếm từ 0, lên thêm 20,
+nếu đạt đủ 100, kích hoạt ngắt và quay về 0</strong></p>
+<p><img alt="trigger" src="../_images/trigger.png" /></p>
+</section>
+<section id="zero-latency-interrupt-ex-zerolatency">
+<h2>3. Zero Latency Interrupt - ex_zerolatency<a class="headerlink" href="#zero-latency-interrupt-ex-zerolatency" title="Link to this heading"></a></h2>
+<p>Ở bài này, chúng ta hãy so sánh việc sử dụng Zero Latency Interrupt có gì khác biệt. Cho kiểu dữ liệu <code class="docutils literal notranslate"><span class="pre">PRIu32</span></code> thuộc thư viện <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;inttypes.h&gt;</span></code> và hàm <code class="docutils literal notranslate"><span class="pre">k_cycle_get_32()</span></code> có tác dụng xác định chu kì máy hiện tại mà Kernel đã trải qua.</p>
+<p><strong>Thực hiện thêm vào chương trình ví dụ trên các hàm và kiểu dữ liệu được nhắc tới, sau đó kích hoạt Zero Latency Interrupt để xem có sự khác biệt hay không</strong></p>
+<a class="reference internal image-reference" href="../_images/zli.png"><img alt="../_images/zli.png" src="../_images/zli.png" style="width: 100%;" /></a>
+</section>
+<section id="ngat-gpio-ex-gpioisr">
+<h2>4. Ngắt GPIO - ex_gpioisr<a class="headerlink" href="#ngat-gpio-ex-gpioisr" title="Link to this heading"></a></h2>
+<p>Thực hiện ví dụ này trên Board STM32F746G Discovery. Trên Board có một Button, đặt tên định danh trong Device Tree là <code class="docutils literal notranslate"><span class="pre">sw0</span></code>. Hãy xác thực điều này. Sau đó:</p>
+<p><strong>Viết chương trình thực hiện ngắt GPIO, mỗi khi bấm nút SW0, Console sẽ hiển thị “Pressed”</strong></p>
+<p><img alt="button" src="../_images/button.png" /></p>
+</section>
+<section id="ngat-uart-ex-uartisr">
+<h2>5. Ngắt UART - ex_uartisr<a class="headerlink" href="#ngat-uart-ex-uartisr" title="Link to this heading"></a></h2>
+<p>UART có trong Zephyr có ít nhất 3 cách để giao tiếp. Ở ví dụ này, hãy sử dụng cách giao tiếp với UART thông qua các API Ngắt với 1 ví dụ điển hình.</p>
+<p><strong>Sử dụng hàm</strong> <code class="docutils literal notranslate"><span class="pre">uart_irq_callback_user_data_set</span></code> <code class="docutils literal notranslate"><span class="pre">uart_irq_rx_enable</span></code> <strong>để viết chương trình hiển thị tin nhắn gửi qua cổng UART sau phím Enter &lt;CR&gt;, qua mỗi tin nhắn nhận được, LED sẽ được Toggle</strong></p>
+<p><img alt="uart" src="../_images/uart.png" /></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="command.html" class="btn btn-neutral float-left" title="Các API thường gặp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../8.Thread/index.html" class="btn btn-neutral float-right" title="Thread in Zephyr" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bao Bui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

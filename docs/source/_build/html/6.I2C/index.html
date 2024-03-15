@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="vi" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I2C &mdash; Tài liệu zephyr_tutorial </title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d3888072"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/translations.js?v=71464233"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Tìm Kiếm" href="../search.html" />
+    <link rel="next" title="Exercise 1" href="exercise/ex1/readme.html" />
+    <link rel="prev" title="UART" href="../5.UART/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            zephyr_tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1.zephyr-setup/index.html">Cài đặt Zephyr cho máy tính</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.introduction/index.html">Giới thiệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.GPIO/index.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4.Timers/index.html">Lesson 4: Timers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.UART/index.html">UART</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">I2C</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#i2c-setup">1. I2C setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#buoc-1-cau-hinh-device-tree-cho-i2c">Bước 1: Cấu hình Device Tree cho I2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#buoc-2-yeu-cau-kconfig-file-cho-i2c">Bước 2: Yêu cầu Kconfig File cho I2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#buoc-3-set-up-i2c-trong-source">Bước 3: Set up I2C trong source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup-dung-struct-i2c-dt-spec">Setup dùng <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">i2c_dt_spec</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-dung-struct-device">Setup dùng <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">device</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bai-tap">2. Bài tập</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exercise/ex1/readme.html">Exercise 1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../7.Interrupt/index.html">Giới thiệu về Ngắt - Interrupt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.Thread/index.html">Thread in Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14.LVGL/index.html">LVGL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15.Modbus_TCP/index.html">Modbus - TCP/IP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16.LVGL-SquareLine/index.html">LVGL</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">zephyr_tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">I2C</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/6.I2C/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="i2c">
+<h1>I2C<a class="headerlink" href="#i2c" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#i2c-setup" id="id1">1. I2C setup</a></p>
+<ul>
+<li><p><a class="reference internal" href="#buoc-1-cau-hinh-device-tree-cho-i2c" id="id2">Bước 1: Cấu hình Device Tree cho I2C</a></p></li>
+<li><p><a class="reference internal" href="#buoc-2-yeu-cau-kconfig-file-cho-i2c" id="id3">Bước 2: Yêu cầu Kconfig File cho I2C</a></p></li>
+<li><p><a class="reference internal" href="#buoc-3-set-up-i2c-trong-source" id="id4">Bước 3: Set up I2C trong source</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#bai-tap" id="id5">2. Bài tập</a></p></li>
+</ul>
+</nav>
+<section id="i2c-setup">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">1. I2C setup</a><a class="headerlink" href="#i2c-setup" title="Link to this heading"></a></h2>
+<p>Khi thiết lập bất kỳ I2C nào, phải tuân theo các bước cơ bản sau:</p>
+<section id="buoc-1-cau-hinh-device-tree-cho-i2c">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">Bước 1: Cấu hình Device Tree cho I2C</a><a class="headerlink" href="#buoc-1-cau-hinh-device-tree-cho-i2c" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>File Device Tree có thể được tìm thấy theo đường dẫn: <code class="docutils literal notranslate"><span class="pre">zephyrproject/zephyr/boards/...</span></code>.</p></li>
+<li><p>Trong dự án này, board sử dụng là STM32F746G_Disco, đường dẫn đến file Device Tree tương ứng: <code class="docutils literal notranslate"><span class="pre">zephyrproject/zephyr/boards/arm/stm32f746g_disco.dts</span></code>.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="p">&amp;</span>i2c1<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>pinctrl-0<span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;<span class="p">&amp;</span>i2c1_scl_pb8<span class="w"> </span><span class="p">&amp;</span>i2c1_sda_pb9&gt;<span class="p">;</span>
+<span class="w">    </span>pinctrl-names<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+<span class="w">    </span>clock-frequency<span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;I2C_BITRATE_FAST&gt;<span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Trong đoạn mã trên, <code class="docutils literal notranslate"><span class="pre">&amp;i2c1</span></code> chỉ định I2C cụ thể (có thể thay đổi tùy thuộc
+vào thiết bị bạn đang sử dụng), <code class="docutils literal notranslate"><span class="pre">clock-frequency</span></code> đặt tốc độ <code class="docutils literal notranslate"><span class="pre">I2C_BITRATE_FAST</span></code>,
+và <code class="docutils literal notranslate"><span class="pre">status</span></code> được đặt thành <code class="docutils literal notranslate"><span class="pre">okay</span></code> để bật I2C.</p>
+<p>Biến <code class="docutils literal notranslate"><span class="pre">clock-frequency</span></code> gồm các giá trị có thể thay đổi sau:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">I2C_BITRATE_STANDARD</span></code>:     100kbps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">I2C_BITRATE_FAST</span></code>:         400kbps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">I2C_BITRATE_FAST_PLUS</span></code>:    1000kbps</p></li>
+</ul>
+<p>Tùy thuộc vào tốc độ i2c mong muốn mà mình có thể cài đặt đè lên các giá trị có
+trong file <code class="docutils literal notranslate"><span class="pre">dts</span></code> của zephyr, bằng cách viết vào <code class="docutils literal notranslate"><span class="pre">app.overlay</span></code> như sau:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="p">&amp;</span>i2c1<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>clock-frequency<span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;I2C_BITRATE_STANDARD&gt;<span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Đoạn code trên được viết vào file <code class="docutils literal notranslate"><span class="pre">app.overlay</span></code> trong folder project của mình,
+giá trị <code class="docutils literal notranslate"><span class="pre">clock-frequency</span></code> đã được chuyển thành <code class="docutils literal notranslate"><span class="pre">I2C_BITRATE_STANDARD</span></code>, so
+với giá trị mặc định là <code class="docutils literal notranslate"><span class="pre">I2C_BITRATE_FAST</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Ghi chú</p>
+<p>Lưu ý rằng chúng ta nên biết tên i2c chúng ta sẽ sử dụng trên thiết bị của
+mình, ở đây ta sẽ dùng i2c1 nên trong <code class="docutils literal notranslate"><span class="pre">app.overlay</span></code>, chúng ta sẽ sử dụng
+<code class="docutils literal notranslate"><span class="pre">&amp;i2c1</span></code>, nếu xài i2c2 thì sẽ xài <code class="docutils literal notranslate"><span class="pre">&amp;i2c2</span></code>, để biết tên i2c của thiết
+bị, chúng ta có thể vào file <code class="docutils literal notranslate"><span class="pre">.dts</span></code> của board của mình trong
+<code class="docutils literal notranslate"><span class="pre">zephyrproject/zephyr/boards/...</span></code>.</p>
+</div>
+</section>
+<section id="buoc-2-yeu-cau-kconfig-file-cho-i2c">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Bước 2: Yêu cầu Kconfig File cho I2C</a><a class="headerlink" href="#buoc-2-yeu-cau-kconfig-file-cho-i2c" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CONFIG_I2C</span><span class="o">=</span><span class="n">y</span>
+</pre></div>
+</div>
+</section>
+<section id="buoc-3-set-up-i2c-trong-source">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Bước 3: Set up I2C trong source</a><a class="headerlink" href="#buoc-3-set-up-i2c-trong-source" title="Link to this heading"></a></h3>
+<p>Có 2 cách để setup I2C trong source:</p>
+<ul class="simple">
+<li><p>Set up dùng <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">i2c_dt_spec</span></code>.</p></li>
+<li><p>Set up dùng <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">device</span></code>.</p></li>
+</ul>
+<section id="setup-dung-struct-i2c-dt-spec">
+<h4>Setup dùng <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">i2c_dt_spec</span></code><a class="headerlink" href="#setup-dung-struct-i2c-dt-spec" title="Link to this heading"></a></h4>
+<section id="buoc-1-cau-hinh-i2c-target-trong-app-overlay">
+<h5>Bước 1: Cấu hình I2C target trong <code class="docutils literal notranslate"><span class="pre">app.overlay</span></code><a class="headerlink" href="#buoc-1-cau-hinh-i2c-target-trong-app-overlay" title="Link to this heading"></a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="p">&amp;</span>i2c1
+<span class="o">{</span>
+<span class="w">    </span>my_lcd:<span class="w"> </span>my_lcd@27
+<span class="w">    </span><span class="o">{</span>
+<span class="w">        </span><span class="nv">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;i2c-device&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nv">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;0x27&gt;<span class="p">;</span>
+<span class="w">        </span><span class="nv">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;LCD_1602&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Đầu tiên, xác định i2c của thiết bị mà chúng ta sẽ sử dụng, sau đó tạo ra môt
+subnode - node con <code class="docutils literal notranslate"><span class="pre">my_lcd</span></code>, có thành viên là <code class="docutils literal notranslate"><span class="pre">my_lcd&#64;27</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;27</span></code> là địa
+chỉ I2C của thiết bị này.</p>
+<p>Tiếp theo, giá trị của <code class="docutils literal notranslate"><span class="pre">my_lcd&#64;27</span></code>, chúng ta chỉ cần
+<code class="docutils literal notranslate"><span class="pre">reg</span> <span class="pre">=</span> <span class="pre">&lt;0x27&gt;</span></code>, còn các biến còn lại có thể có hoặc không.</p>
+<div class="admonition note">
+<p class="admonition-title">Ghi chú</p>
+<p>Lưu ý rằng, địa chỉ I2C ở đây chúng ta sẽ sử dụng giá trị lấy thẳng từ
+datasheet, <strong>không được</strong> shift trái, phải.</p>
+</div>
+<p>Chúng ta có thể tạo thêm nhiều thiết bị trong node <code class="docutils literal notranslate"><span class="pre">&amp;i2c1</span></code> này, tương đương
+với nhiều slaver cho một i2c controller, tuy nhiên, chúng ta không thể lấy
+subnode của i2c này xài cho i2c khác được, một là chúng ta copy qua i2c khác,
+hai là đổi tên <code class="docutils literal notranslate"><span class="pre">&amp;i2c1</span></code> này thành i2c mong muốn.</p>
+</section>
+<section id="buoc-2-cau-hinh-trong-source">
+<h5>Bước 2: Cấu hình trong source<a class="headerlink" href="#buoc-2-cau-hinh-trong-source" title="Link to this heading"></a></h5>
+<p>Các thư viện phải include:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/_stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/device.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/kernel.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/drivers/i2c.h&gt;</span>
+</pre></div>
+</div>
+<p>Đầu tiên, chúng ta sẽ nạp các giá trị của i2c target trong <code class="docutils literal notranslate"><span class="pre">app.overlay</span></code> vào
+struct <code class="docutils literal notranslate"><span class="pre">i2c_dt_spec</span></code>, sử dụng <code class="docutils literal notranslate"><span class="pre">I2C_DT_SPEC_GET(node_id)</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define I2C1_NODE DT_NODELABEL(my_lcd)</span>
+
+<span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">i2c_dt_spec</span><span class="w"> </span><span class="n">i2c_dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">I2C_DT_SPEC_GET</span><span class="p">(</span><span class="n">I2C1_NODE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Để pass vào param <code class="docutils literal notranslate"><span class="pre">node_id</span></code>, chúng ta sẽ sử dụng <code class="docutils literal notranslate"><span class="pre">DT_NODELABEL(my_lcd)</span></code>, lưu
+ý chúng ta muốn trỏ đến subnode nào đã được cài đặt ở <code class="docutils literal notranslate"><span class="pre">app.overlay</span></code> trên thì
+<strong>viết đúng</strong> tên của subnode đó.</p>
+</section>
+<section id="buoc-3-giao-tiep-i2c">
+<h5>Bước 3: Giao tiếp I2C<a class="headerlink" href="#buoc-3-giao-tiep-i2c" title="Link to this heading"></a></h5>
+<p>Để viết vào i2c target chúng ta sẽ sử dụng <code class="docutils literal notranslate"><span class="pre">i2c_write_dt</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x10</span><span class="p">;</span>
+<span class="w">    </span><span class="n">i2c_write_dt</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i2c_dev</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Hàm <code class="docutils literal notranslate"><span class="pre">i2c_write_dt</span></code> gồm có 3 param:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">*spec</span></code>: trỏ đến <code class="docutils literal notranslate"><span class="pre">stuct</span> <span class="pre">i2c_dt_spec</span></code> của chúng ta.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*buf</span></code>: trỏ đến biến/array chứa các giá trị cần truyền.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_bytes</span></code>: số bytes cần phải truyền.</p></li>
+</ul>
+<p>Để đọc từ i2c target chúng ta sẽ sử dụng <code class="docutils literal notranslate"><span class="pre">i2c_read_dt</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="n">i2c_read_dt</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i2c_dev</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Hàm <code class="docutils literal notranslate"><span class="pre">i2c_write_dt</span></code> gồm có 3 param:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">*spec</span></code>: trỏ đến <code class="docutils literal notranslate"><span class="pre">stuct</span> <span class="pre">i2c_dt_spec</span></code> của chúng ta.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*buf</span></code>: trỏ đến biến/array chứa các giá trị cần nhân.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_bytes</span></code>: số bytes cần phải nhân.</p></li>
+</ul>
+<p>Để cả truyền và nhận chúng ta dùng <code class="docutils literal notranslate"><span class="pre">i2c_write_read_dt</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">write_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x12</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">read_data</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">i2c_write_read_dt</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i2c_dev</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">write_data</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">read_data</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Hàm <code class="docutils literal notranslate"><span class="pre">i2c_write_dt</span></code> gồm có 3 param:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">*spec</span></code>: trỏ đến <code class="docutils literal notranslate"><span class="pre">stuct</span> <span class="pre">i2c_dt_spec</span></code> của chúng ta.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*write_buf</span></code>: trỏ đến biến/array chứa các giá trị cần truyện.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_write</span></code>: số bytes cần phải truyền.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*read_buf</span></code>: trỏ đến biến/array chứa các giá trị cần truyền.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_read</span></code>: số bytes cần phải nhận.</p></li>
+</ul>
+</section>
+</section>
+<section id="setup-dung-struct-device">
+<h4>Setup dùng <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">device</span></code><a class="headerlink" href="#setup-dung-struct-device" title="Link to this heading"></a></h4>
+<p>Các thư viện phải include:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/_stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/device.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/drivers/i2c.h&gt;</span>
+</pre></div>
+</div>
+<p>Tiếp theo, device binding với node lable trong dts</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define I2C_NODE DT_NODELABEL(i2c1)</span>
+<span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">device</span><span class="w"> </span><span class="o">*</span><span class="n">i2c_dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEVICE_DT_GET</span><span class="p">(</span><span class="n">I2C_NODE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Toàn bộ code phía sau sẽ bỏ vào hàm <code class="docutils literal notranslate"><span class="pre">main()</span></code>.
+Sau khi đã binding với device, chúng ta sẽ config i2c</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">i2c_configure</span><span class="p">(</span><span class="n">i2c_dev</span><span class="p">,</span><span class="w"> </span><span class="n">I2C_SPEED_SET</span><span class="p">(</span><span class="n">I2C_SPEED_STANDARD</span><span class="p">)</span><span class="o">|</span><span class="n">I2C_MODE_CONTROLLER</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Hàm <code class="docutils literal notranslate"><span class="pre">i2c_configure</span></code>, nhận 2 param là:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dev</span></code>: Là pointer tới struct device chúng ta vừa tạo ở trên.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dev_config</span></code>: Một gói 32 bit để config I2C, ở đây chúng ta sẽ dùng các flag
+được zephyr define sẵn.</p></li>
+</ul>
+<p>Ở ví dụ trên chúng ta dùng 2 flag là <code class="docutils literal notranslate"><span class="pre">I2C_MODE_CONTROLLER</span></code> và
+<code class="docutils literal notranslate"><span class="pre">I2C_SPEED_SET(I2C_SPEED_STANDARD)</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">I2C_MODE_CONTROLLER</span></code> sẽ cài đặt I2C là mode controller.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">I2C_SPEED_SET(I2C_SPEED_STANDARD)</span></code> để cài đặt speed cho clock là
+<code class="docutils literal notranslate"><span class="pre">100khz</span></code>.</p></li>
+</ul>
+<p>Sau khi cài đặt xong, chúng ta có thể truyền dữ liệu:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0X0034</span><span class="p">;</span>
+<span class="n">i2c_write</span><span class="p">(</span><span class="n">i2c_dev</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Hàm <code class="docutils literal notranslate"><span class="pre">i2c_write</span></code> nhận các param sau:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dev</span></code>: Pointer tới struct device của I2C.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Pointer tới biến dữ liêu để truyền đi.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_bytes</span></code>: Số bytes phải truyền.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">addr</span></code>: Địa chỉ I2C dữ liệu <code class="docutils literal notranslate"><span class="pre">uint16_t</span></code>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="bai-tap">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">2. Bài tập</a><a class="headerlink" href="#bai-tap" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exercise/ex1/readme.html">Exercise 1</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../5.UART/index.html" class="btn btn-neutral float-left" title="UART" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exercise/ex1/readme.html" class="btn btn-neutral float-right" title="Exercise 1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bao Bui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

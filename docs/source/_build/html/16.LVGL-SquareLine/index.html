@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="vi" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LVGL &mdash; Tài liệu zephyr_tutorial </title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d3888072"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/tabs.js?v=3030b3cb"></script>
+        <script src="../_static/translations.js?v=71464233"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Tìm Kiếm" href="../search.html" />
+    <link rel="prev" title="Modbus - TCP/IP" href="../15.Modbus_TCP/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            zephyr_tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1.zephyr-setup/index.html">Cài đặt Zephyr cho máy tính</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.introduction/index.html">Giới thiệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.GPIO/index.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4.Timers/index.html">Lesson 4: Timers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.UART/index.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.I2C/index.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.Interrupt/index.html">Giới thiệu về Ngắt - Interrupt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.Thread/index.html">Thread in Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14.LVGL/index.html">LVGL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15.Modbus_TCP/index.html">Modbus - TCP/IP</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LVGL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#huong-dan-su-dung-squareline-studio">Hướng dẫn sử dụng SquareLine Studio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cai-dat-ung-dung-squareline-studio">Cài đặt ứng dụng SquareLine Studio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#su-dung-ung-dung-squareline-studio">Sử dụng ứng dụng SquareLine Studio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#them-chuong-trinh-giao-dien-vao-chuong-trinh-chinh-cua-du-an">Thêm chương trình giao diện vào chương trình chính của dự án</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hello-world-voi-squareline-studio">Hello World với SquareLine Studio</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#thiet-ke-giao-dien-tren-squareline-studio">Thiết kế giao diện trên SquareLine Studio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cau-truc-chuong-trinh-cay-thu-muc">Cấu trúc chương trình (Cây thư mục)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-main-c">File <code class="docutils literal notranslate"><span class="pre">main.c</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-prj-conf">File <code class="docutils literal notranslate"><span class="pre">prj.conf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-cmakelist-txt">File <code class="docutils literal notranslate"><span class="pre">CMakeList.txt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ket-qua-chay-tren-stm32f746-discovery-kit">Kết quả chạy trên STM32F746 Discovery Kit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">zephyr_tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">LVGL</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/16.LVGL-SquareLine/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lvgl">
+<h1>LVGL<a class="headerlink" href="#lvgl" title="Link to this heading"></a></h1>
+<p>LVGL(Light and Versatile Graphics Library) là thư viện đồ họa nhúng mã nguồn mở và miễn phí
+phổ biến nhất để tạo giao diện người dùng đẹp mắt cho mọi MCU, MPU và loại màn hình.
+Tìm hiểu thêm tại <a class="reference external" href="https://lvgl.io/">https://lvgl.io</a>.</p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#huong-dan-su-dung-squareline-studio" id="id3">Hướng dẫn sử dụng SquareLine Studio</a></p>
+<ul>
+<li><p><a class="reference internal" href="#cai-dat-ung-dung-squareline-studio" id="id4">Cài đặt ứng dụng SquareLine Studio</a></p></li>
+<li><p><a class="reference internal" href="#su-dung-ung-dung-squareline-studio" id="id5">Sử dụng ứng dụng SquareLine Studio</a></p></li>
+<li><p><a class="reference internal" href="#them-chuong-trinh-giao-dien-vao-chuong-trinh-chinh-cua-du-an" id="id6">Thêm chương trình giao diện vào chương trình chính của dự án</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#hello-world-voi-squareline-studio" id="id7">Hello World với SquareLine Studio</a></p>
+<ul>
+<li><p><a class="reference internal" href="#thiet-ke-giao-dien-tren-squareline-studio" id="id8">Thiết kế giao diện trên SquareLine Studio</a></p></li>
+<li><p><a class="reference internal" href="#cau-truc-chuong-trinh-cay-thu-muc" id="id9">Cấu trúc chương trình (Cây thư mục)</a></p></li>
+<li><p><a class="reference internal" href="#file-main-c" id="id10">File <code class="docutils literal notranslate"><span class="pre">main.c</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-prj-conf" id="id11">File <code class="docutils literal notranslate"><span class="pre">prj.conf</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-cmakelist-txt" id="id12">File <code class="docutils literal notranslate"><span class="pre">CMakeList.txt</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ket-qua-chay-tren-stm32f746-discovery-kit" id="id13">Kết quả chạy trên STM32F746 Discovery Kit</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="huong-dan-su-dung-squareline-studio">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Hướng dẫn sử dụng SquareLine Studio</a><a class="headerlink" href="#huong-dan-su-dung-squareline-studio" title="Link to this heading"></a></h2>
+<p>SquareLine Studio là trình chỉnh sửa giao diện, người dùng kéo và thả các thành phần đơn giản một cách trực quan
+để tạo giao diện người dùng đẹp mắt một cách nhanh chóng và dễ dàng cho các ứng dụng nhúng và máy tính để bàn.</p>
+<section id="cai-dat-ung-dung-squareline-studio">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Cài đặt ứng dụng SquareLine Studio</a><a class="headerlink" href="#cai-dat-ung-dung-squareline-studio" title="Link to this heading"></a></h3>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Windows</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Linux</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">macOS</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p><strong>Yêu cầu tối thiếu để cài đặt SquareLine Studio:</strong></p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Intel x64 PC with minimum:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>CPU: Bộ xử lý Intel hoặc AMD có hỗ trợ 64-bit, bộ xử lý 1,5 GHz hoặc nhanh hơn</p></li>
+<li><p>RAM: 4 GB</p></li>
+<li><p>HDD: 2 GB</p></li>
+<li><p>GPU: Hỗ trợ DirectX 11 hoặc OpenGL 3.2</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Hệ điều hành:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Hệ điều hành: Windows 7 trở lên (64-bit)</p></li>
+<li><p>Độ phân giải màn hình: 1280 x 800</p></li>
+<li><p>Cần có kết nối internet để kích hoạt phần mềm</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Tiến hành cài đặt:</strong></p></li>
+</ul>
+<blockquote>
+<div><p><cite>Bước 1</cite>: Tải file cài đặt: truy cập vào <a class="reference external" href="https://squareline.io/downloads">Link</a> và tải file cài đặt dành cho Windows</p>
+<p><cite>Bước 2</cite>: Chạy file SquareLine_Studio_Setup.exe để cài đặt ứng dụng. Làm theo hướng dẫn để hoàn tất quá trình cài đặt</p>
+</div></blockquote>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p><strong>Yêu cầu tối thiếu để cài đặt SquareLine Studio:</strong></p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Intel x64 PC with minimum:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>CPU: Bộ xử lý Intel hoặc AMD có hỗ trợ 64-bit, bộ xử lý 1,5 GHz hoặc nhanh hơn</p></li>
+<li><p>RAM: 4 GB</p></li>
+<li><p>HDD: 2 GB</p></li>
+<li><p>GPU: Hỗ trợ Vulcan hoặc OpenGL 3.2</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Hệ điều hành:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Hệ điều hành: Ubuntu 18.04 hoặc mới hơn</p></li>
+<li><p>Độ phân giải màn hình: 1280 x 800</p></li>
+<li><p>Cần có internet để kích hoạt phần mềm</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Tiến hành cài đặt:</strong></p></li>
+</ul>
+<blockquote>
+<div><p><cite>Bước 1</cite>: Tải file cài đặt: truy cập vào <a class="reference external" href="https://squareline.io/downloads">Link</a> và tải file cài đặt dành cho Linux</p>
+<p><cite>Bước 2</cite>: Giải nén file vừa tải</p>
+<p><cite>Bước 3</cite>: Chạy file setup.sh</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Mở terminal truy cập vào thư mục có chứa file setup.sh</p></li>
+<li><p>Chạy các lệnh sau.</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>setup.sh
+./setup.sh
+</pre></div>
+</div>
+</div></blockquote>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p><strong>Yêu cầu tối thiếu để cài đặt SquareLine Studio:</strong></p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Intel x64 PC with minimum:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>CPU: Intel or AMD processor with 64-bit support, 1.5 GHz or faster processor</p></li>
+<li><p>RAM: 4 GB</p></li>
+<li><p>HDD: 2 GB of storage space</p></li>
+<li><p>GPU: Hỗ trợ Metal hoặc OpenGL 3.2</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Hệ điều hành:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>Hệ điều hành: High Sierra 10.13 hoặc mới hơn</p></li>
+<li><p>Độ phân giải màn hình: 1280 x 800</p></li>
+<li><p>Cần có kết nối internet để kích hoạt phần mềm</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Tiến hành cài đặt:</strong></p></li>
+</ul>
+<blockquote>
+<div><p><cite>Bước 1</cite>: Tải file cài đặt: truy cập vào <a class="reference external" href="https://squareline.io/downloads">Link</a> và tải file cài đặt dành cho macOS</p>
+<p><cite>Bước 2</cite>: Khởi chạy SquareLineStudio, chấp nhận Điều khoản và Điều kiện và bạn đã sẵn sàng sử dụng phần mềm.
+Nếu bạn có CPU dựa trên ARM (ví dụ Apple M1) thì bạn nên sử dụng Rosetta.
+Tim hiểu thêm ở đây: <a class="reference external" href="https://support.apple.com/en-us/HT211861">https://support.apple.com/en-us/HT211861</a></p>
+</div></blockquote>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Ghi chú</p>
+<p>Lưu ý: Nếu xảy ra lỗi thiếu thư viện thì các bạn cài thêm cho máy (Bổ sung một số lỗi có thể gặp sau).</p>
+</div>
+</section>
+<section id="su-dung-ung-dung-squareline-studio">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Sử dụng ứng dụng SquareLine Studio</a><a class="headerlink" href="#su-dung-ung-dung-squareline-studio" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Mở ứng dụng SquareLine Studio</p></li>
+<li><p>Đăng nhập</p>
+<p>Nếu bạn chỉ muốn dùng thử chương trình, bạn không cần phải đăng ký hoặc đăng nhập.
+Trong trường hợp bạn chưa sử dụng SquareLine Studio trên máy tính,
+bạn sẽ tự động nhận được phiên bản dùng thử 30 ngày.</p>
+<p>Nếu bạn muốn sử dụng lâu dài hãy mua giấy phép (license) và đăng nhập.
+Sau đó, bạn có thể tạo một dự án mới, tải dự án đã lưu của mình hoặc
+làm việc với một ví dụ có sẵn trong SquareLine Studio.</p>
+</li>
+<li><p>Mở dự án đã lưu hoặc tải về trước đó</p>
+<blockquote>
+<div><img alt="error image" class="align-center" src="../_images/img1.png" />
+</div></blockquote>
+<p>Nhấn <strong>Improt Project</strong> để tải một dự án đã được lưu trên máy tính</p>
+</li>
+<li><p>Tạo dự án mới</p>
+<blockquote>
+<div><img alt="error image" class="align-center" src="../_images/img21.png" />
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Board Description</strong> - Mô tả board được chọn.</p></li>
+<li><p><strong>Project Description</strong> - Mô tả dự án của bạn.</p></li>
+<li><p><strong>Project Settings</strong> - Tạo tên, đường dẫn và độ phân giải của dự án của bạn.</p></li>
+<li><p><strong>Create Project</strong> - Sau khi thêm tất cả các tham số cần thiết, bạn có thể tạo dự án của mình.</p></li>
+</ul>
+</li>
+<li><p>Mở dự án mẫu của SquareLine Studio cung cấp</p>
+<blockquote>
+<div><img alt="error image" class="align-center" src="../_images/img31.png" />
+<p>Để sử dụng một dự án mẫu, chỉ cần chọn một dự án thích hợp từ danh sách và
+tải nó bằng cách nhấp <strong>CREATE</strong></p>
+</div></blockquote>
+</li>
+<li><p>Xuất dự án giao diện sau khi thiết kế trên SquareLine Studio</p>
+<blockquote>
+<div><img alt="error image" class="align-center" src="../_images/img41.png" />
+<p>Nhấn <strong>Export</strong> -&gt; <strong>Export UI Files</strong>, sau đó chọn thư mục sẽ chứa dự án giao diện đó.</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="them-chuong-trinh-giao-dien-vao-chuong-trinh-chinh-cua-du-an">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Thêm chương trình giao diện vào chương trình chính của dự án</a><a class="headerlink" href="#them-chuong-trinh-giao-dien-vao-chuong-trinh-chinh-cua-du-an" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Tạo một thư mục <code class="docutils literal notranslate"><span class="pre">gui</span></code> trong dự án, đồng cấp với thư mục <code class="docutils literal notranslate"><span class="pre">source</span></code> để
+chứa các file giao diện vừa thiết kế trên SquareLine Studio</p>
+<blockquote>
+<div><img alt="error image" class="align-center" src="../_images/img5.png" />
+</div></blockquote>
+</li>
+<li><p>Thay đổi đường dẫn file thư viện <code class="docutils literal notranslate"><span class="pre">lvgl.h</span></code> trong file <code class="docutils literal notranslate"><span class="pre">ui.h</span></code></p>
+<blockquote>
+<div><img alt="error image" class="align-center" src="../_images/img6.png" />
+<img alt="error image" class="align-center" src="../_images/img7.png" />
+</div></blockquote>
+</li>
+<li><p>Thêm thư viện <code class="docutils literal notranslate"><span class="pre">ui.h</span></code> vào trong file <code class="docutils literal notranslate"><span class="pre">main.c</span></code></p>
+<blockquote>
+<div><img alt="error image" class="align-center" src="../_images/img8.png" />
+</div></blockquote>
+</li>
+<li><p>Chỉnh sửa file <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> cùng cấp với folder <code class="docutils literal notranslate"><span class="pre">src</span></code> như sau:</p>
+<blockquote>
+<div><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.20.0</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Zephyr</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">HINTS</span><span class="w"> </span><span class="o">$ENV{</span><span class="nv">ZEPHYR_BASE</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">_htsang_ui_button</span><span class="p">)</span>
+<span class="nb">FILE</span><span class="p">(</span><span class="s">GLOB</span><span class="w"> </span><span class="s">app_sources</span><span class="w"> </span><span class="s">source/*.c</span><span class="p">)</span>
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">app_sources</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">include_directories</span><span class="p">(</span><span class="s">gui</span><span class="p">)</span>
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">gui/ui_helpers.c</span><span class="p">)</span>
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">gui/ui.c</span><span class="p">)</span>
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">gui/components/ui_comp_hook.c</span><span class="p">)</span>
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">gui/screens/ui_Screen1.c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Thêm cấu hình trong file <code class="docutils literal notranslate"><span class="pre">prj.conf</span></code> cùng cấp với folder <code class="docutils literal notranslate"><span class="pre">src</span></code> như sau:</p>
+<blockquote>
+<div><div class="highlight-linux-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># LVGL</span>
+CONFIG_LVGL=y
+CONFIG_LV_Z_MEM_POOL_SIZE=8192
+<span class="c1"># Display</span>
+CONFIG_DISPLAY=y
+CONFIG_INPUT=y
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+<section id="hello-world-voi-squareline-studio">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Hello World với SquareLine Studio</a><a class="headerlink" href="#hello-world-voi-squareline-studio" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Ghi chú</p>
+<p>Hướng dẫn này được chạy trên board <a class="reference external" href="https://www.st.com/en/evaluation-tools/32f746gdiscovery.html">STM32F746G_Disco</a></p>
+</div>
+<section id="thiet-ke-giao-dien-tren-squareline-studio">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Thiết kế giao diện trên SquareLine Studio</a><a class="headerlink" href="#thiet-ke-giao-dien-tren-squareline-studio" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Tạo dự án mới</p>
+<blockquote>
+<div><p>Tạo dự án mới phần cứng STxxxx, kích thước màn hình là 480x272 và chế độ màu 16bits</p>
+</div></blockquote>
+</li>
+<li><p>Thêm nút nhấn (button):</p>
+<blockquote>
+<div><p>Nhấn đúp vào biểu tượng nút nhấn (<strong>Button</strong>) trên bảng Widgets.
+Khi đó, màn hình giao diện sẽ hiển thị ra một nút nhấn có tên là <strong>Button1</strong> kích thước mặc định rộng 100px và dài 50px
+tại vị trí trung tâm màn hình (trung tâm của thành phần mẹ).</p>
+</div></blockquote>
+</li>
+<li><p>Thay đổi thuộc tính cho nút nhấn <strong>HelloButton1</strong>:</p>
+<blockquote>
+<div><p>Đổi tên, kích thước...</p>
+</div></blockquote>
+</li>
+<li><p>Thiết lập sự kiện cho nút nhấn:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Bước 1: Ở mục Event, nhấn vào nút <strong>ADD EVENT</strong></p></li>
+<li><p>Bước 2: Chọn hành động khi sự kiện kích hoạt. Ở đây chọn hoạt động <strong>MODIFY STATE</strong> (biến đổi trạng thái). Sau đó nhấn <strong>ADD</strong></p></li>
+<li><p>Bước 3: Thay đổi tên cho sự kiện, chọn hành động kích hoạt sự kiện. Chọn đối tượng (<strong>HelloButton</strong>), trạng thái (<strong>CHECKED</strong>) và kiểu chuyển trạng thái (<strong>TOGGLE</strong>) cho hoạt động biến đổi trạng thái</p></li>
+</ul>
+<img alt="error image" class="align-center" src="../_images/HelloWorld3.png" />
+</div></blockquote>
+</li>
+<li><p>Thiết kế nút nhấn khi ở trạng thái <strong>CHECKED</strong>:</p>
+<blockquote>
+<div><p>Chuyển trạng thái nút nhấn sang <strong>CHECKED</strong></p>
+<img alt="../_images/HelloWorld4.png" class="align-center" src="../_images/HelloWorld4.png" />
+<p>Thiết lập thuộc tính cho trạng thái <strong>CHECKED</strong>: Ở đây chỉ chỉnh nền thành màu đỏ</p>
+<img alt="../_images/HelloWorld5.png" class="align-center" src="../_images/HelloWorld5.png" />
+</div></blockquote>
+</li>
+<li><p>Tạo nhãn dán cho nút nhấn (<strong>Label</strong>):</p>
+<blockquote>
+<div><p>Nhấn đúp vào biểu tượng nhãn dán (<strong>Label</strong>) trên bảng Widgets.
+Khi đó, một nhãn dán tên <strong>Label1</strong> sẽ được tạo ra với nội dung <em>text</em>
+Sau đó, kéo <strong>Label1</strong> thả vào HelloButton để thay đổi cấp cho <strong>Label1</strong> (khi đó <strong>Lable1</strong> sẽ là con của <strong>HelloButton</strong>)</p>
+<img alt="../_images/HelloWorld7.png" class="align-center" src="../_images/HelloWorld7.png" />
+</div></blockquote>
+</li>
+<li><p>Thay đổi thuộc tính cho nhãn dán <strong>HelloButton1</strong>:</p>
+<blockquote>
+<div><p>Chỉnh sửa nội dung nhãn dán thành <em>HELLO WORLD</em></p>
+<img alt="../_images/HelloWorld8.png" class="align-center" src="../_images/HelloWorld8.png" />
+</div></blockquote>
+</li>
+<li><p>Chạy mô phỏng giao diện:</p>
+<blockquote>
+<div><img alt="../_images/demo_in_SquareLine.gif" class="align-center" src="../_images/demo_in_SquareLine.gif" />
+</div></blockquote>
+</li>
+<li><p>Xuất bản thiết kế giao diện:</p>
+<blockquote>
+<div><img alt="../_images/HelloWorld_export.png" class="align-center" src="../_images/HelloWorld_export.png" />
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="cau-truc-chuong-trinh-cay-thu-muc">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Cấu trúc chương trình (Cây thư mục)</a><a class="headerlink" href="#cau-truc-chuong-trinh-cay-thu-muc" title="Link to this heading"></a></h3>
+<img alt="error images" class="align-center" src="../_images/HelloWorld_explorer.png" />
+</section>
+<section id="file-main-c">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">File <code class="docutils literal notranslate"><span class="pre">main.c</span></code></a><a class="headerlink" href="#file-main-c" title="Link to this heading"></a></h3>
+<blockquote>
+<div><div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/drivers/display.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/kernel.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/logging/log.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;lvgl.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/device.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../gui/ui.h&quot;</span>
+
+<span class="n">LOG_MODULE_REGISTER</span><span class="p">(</span><span class="n">app</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">device</span><span class="w"> </span><span class="o">*</span><span class="n">display_dev</span><span class="p">;</span>
+<span class="w">   </span><span class="n">display_dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEVICE_DT_GET</span><span class="p">(</span><span class="n">DT_CHOSEN</span><span class="p">(</span><span class="n">zephyr_display</span><span class="p">));</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">device_is_ready</span><span class="p">(</span><span class="n">display_dev</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="n">ui_init</span><span class="p">();</span>
+<span class="w">   </span><span class="n">lv_task_handler</span><span class="p">();</span>
+<span class="w">   </span><span class="n">display_blanking_off</span><span class="p">(</span><span class="n">display_dev</span><span class="p">);</span>
+
+<span class="w">   </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="n">k_msleep</span><span class="p">(</span><span class="n">lv_task_handler</span><span class="p">());</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="file-prj-conf">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">File <code class="docutils literal notranslate"><span class="pre">prj.conf</span></code></a><a class="headerlink" href="#file-prj-conf" title="Link to this heading"></a></h3>
+<blockquote>
+<div><div class="highlight-kernel-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># Main config</span>
+CONFIG_MAIN_STACK_SIZE=2048
+CONFIG_LOG=y
+
+<span class="c1"># LVGL</span>
+CONFIG_LVGL=y
+CONFIG_LV_Z_MEM_POOL_SIZE=8192
+
+<span class="c1"># Display</span>
+CONFIG_DISPLAY=y
+CONFIG_INPUT=y
+
+<span class="c1"># Power management</span>
+CONFIG_PM=y
+
+<span class="c1"># Build</span>
+CONFIG_SIZE_OPTIMIZATIONS=y
+
+CONFIG_ARM_MPU=n
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="file-cmakelist-txt">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">File <code class="docutils literal notranslate"><span class="pre">CMakeList.txt</span></code></a><a class="headerlink" href="#file-cmakelist-txt" title="Link to this heading"></a></h3>
+<blockquote>
+<div><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.20.0</span><span class="p">)</span>
+
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Zephyr</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">HINTS</span><span class="w"> </span><span class="o">$ENV{</span><span class="nv">ZEPHYR_BASE</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">HELLOWORLD_UI</span><span class="p">)</span>
+
+<span class="nb">FILE</span><span class="p">(</span><span class="s">GLOB</span><span class="w"> </span><span class="s">app_sources</span><span class="w"> </span><span class="s">source/*.c</span><span class="p">)</span>
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="o">${</span><span class="nv">app_sources</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">include_directories</span><span class="p">(</span><span class="s">gui</span><span class="p">)</span>
+
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">gui/ui_helpers.c</span><span class="p">)</span>
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">gui/ui.c</span><span class="p">)</span>
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">gui/components/ui_comp_hook.c</span><span class="p">)</span>
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">gui/screens/ui_Screen1.c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="ket-qua-chay-tren-stm32f746-discovery-kit">
+<h3>Kết quả chạy trên <a class="reference external" href="https://www.st.com/en/evaluation-tools/32f746gdiscovery.html">STM32F746 Discovery Kit</a><a class="headerlink" href="#ket-qua-chay-tren-stm32f746-discovery-kit" title="Link to this heading"></a></h3>
+<blockquote>
+<div><img alt="../_images/img9.png" class="align-center" src="../_images/img9.png" />
+</div></blockquote>
+<p>Kích hoạt môi trường ảo cho zephyr:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/zephyrproject/.venv/bin/activate
+</pre></div>
+</div>
+</div></blockquote>
+<p>Di chuyển địa chỉ terminal đến folder của dự án và tiến hành build chương trình:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-b<span class="w"> </span>stm32f746g_disco
+</pre></div>
+</div>
+</div></blockquote>
+<p>Sau khi build xong, tiến hành fash vào board:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</div></blockquote>
+<p>Kết quả thực tế:</p>
+<blockquote>
+<div><img alt="../_images/HelloWord_in_STM32F746_Disco.gif" class="align-center" src="../_images/HelloWord_in_STM32F746_Disco.gif" />
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../15.Modbus_TCP/index.html" class="btn btn-neutral float-left" title="Modbus - TCP/IP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bao Bui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="vi" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Window &mdash; Tài liệu zephyr_tutorial </title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d3888072"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../_static/translations.js?v=71464233"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Tìm Kiếm" href="../../search.html" />
+    <link rel="next" title="Giới thiệu" href="../../2.introduction/index.html" />
+    <link rel="prev" title="Ubuntu" href="../ubuntu/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            zephyr_tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cài đặt Zephyr cho máy tính</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#lua-chon-os-cai-dat">Lựa chọn OS cài đặt</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../ubuntu/index.html">Ubuntu</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Window</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#buoc-1-cai-dat-cac-tool-phu-thuoc">Bước 1: Cài đặt các tool phụ thuộc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#buoc-2-cai-moi-truong-ao-va-cac-dependencies-cua-zephyr-project">Bước 2: Cài môi trường ảo và các <em>dependencies</em> của zephyr project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#buoc-3-cai-zephyr-sdk">Bước 3: Cài Zephyr SDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#buoc-4-build-mot-project-sample">Bước 4: Build một project sample</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../2.introduction/index.html">Giới thiệu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3.GPIO/index.html">GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4.Timers/index.html">Lesson 4: Timers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../5.UART/index.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../6.I2C/index.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../7.Interrupt/index.html">Giới thiệu về Ngắt - Interrupt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../8.Thread/index.html">Thread in Zephyr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../14.LVGL/index.html">LVGL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../15.Modbus_TCP/index.html">Modbus - TCP/IP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../16.LVGL-SquareLine/index.html">LVGL</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">zephyr_tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cài đặt Zephyr cho máy tính</a></li>
+      <li class="breadcrumb-item active">Window</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/1.zephyr-setup/window/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="window">
+<h1>Window<a class="headerlink" href="#window" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#buoc-1-cai-dat-cac-tool-phu-thuoc" id="id1">Bước 1: Cài đặt các tool phụ thuộc</a></p></li>
+<li><p><a class="reference internal" href="#buoc-2-cai-moi-truong-ao-va-cac-dependencies-cua-zephyr-project" id="id2">Bước 2: Cài môi trường ảo và các <em>dependencies</em> của zephyr project</a></p></li>
+<li><p><a class="reference internal" href="#buoc-3-cai-zephyr-sdk" id="id3">Bước 3: Cài Zephyr SDK</a></p></li>
+<li><p><a class="reference internal" href="#buoc-4-build-mot-project-sample" id="id4">Bước 4: Build một project sample</a></p></li>
+</ul>
+</nav>
+<div class="admonition note">
+<p class="admonition-title">Ghi chú</p>
+<p>Tên user bắt buộc không có khoảng trắng ở giữa</p>
+</div>
+<section id="buoc-1-cai-dat-cac-tool-phu-thuoc">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Bước 1: Cài đặt các tool phụ thuộc</a><a class="headerlink" href="#buoc-1-cai-dat-cac-tool-phu-thuoc" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Mở PowerShell[Win10]/Terminal[Win11] với quyền <strong>Administrator</strong>.</p></li>
+<li><p>Nhập lệnh</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://community.chocolatey.org/install.ps1&#39;))
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Check:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>Choco -version
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Tắt cửa sổ PowerShell[Win10]/Terminal[Win11] , và mở lại với quyền <strong>Administrator</strong>.</p></li>
+<li><p>Nhập lệnh:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>choco feature enable -n allowGlobalConfirmation
+</pre></div>
+</div>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>choco install cmake --installargs &#39;ADD_CMAKE_TO_PATH=System&#39;
+</pre></div>
+</div>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>choco install ninja gperf python311 git dtc-msys2 wget 7zip
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Sau khi cài đặt tắt cửa sổ.</p></li>
+</ul>
+</section>
+<section id="buoc-2-cai-moi-truong-ao-va-cac-dependencies-cua-zephyr-project">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Bước 2: Cài môi trường ảo và các <em>dependencies</em> của zephyr project</a><a class="headerlink" href="#buoc-2-cai-moi-truong-ao-va-cac-dependencies-cua-zephyr-project" title="Link to this heading"></a></h2>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="k">cd</span> C:\Users\dongkhoa
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Ghi chú</p>
+<p><code class="docutils literal notranslate"><span class="pre">dongkhoa</span></code> là tên user thay đổi lại cho phù với máy tính của bạn.</p>
+</div>
+<ul class="simple">
+<li><p>Tạo môi trường ảo:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>python -m venv zephyrproject\.venv
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Kích hoạt môi trường ảo:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>zephyrproject\.venv\Scripts\activate.bat
+</pre></div>
+</div>
+<p><strong>Sau khi kích hoạt môi trường ảo thì shell sẽ có tiền tố</strong> <code class="docutils literal notranslate"><span class="pre">(.venv)</span></code>. Để
+thoát khỏi chế độ kích hoạt sử dụng lệnh <code class="docutils literal notranslate"><span class="pre">deactivate</span></code>:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>.venv<span class="p">)</span> C:\Users\dongkhoa
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Ghi chú</p>
+<p>Luôn kích hoạt môi trường ảo trước khi bắt đầu làm việc với zephyr.</p>
+</div>
+<ul class="simple">
+<li><p>Cài đặt <code class="docutils literal notranslate"><span class="pre">west</span></code></p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>pip install west
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Lấy source code của zephyr về máy tính:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>west init zephyrproject
+<span class="k">cd</span> zephyrproject
+west update
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Giải nén các gói <strong>CMake Zephyr</strong>:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>west zephyr-export
+</pre></div>
+</div>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>pip install -r C:\Users\dongkhoa\zephyrproject\zephyr\scripts\requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="buoc-3-cai-zephyr-sdk">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Bước 3: Cài Zephyr SDK</a><a class="headerlink" href="#buoc-3-cai-zephyr-sdk" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Mở PowerShell[Win10]/Terminal[Win11] với quyền <strong>User</strong>.</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="k">cd</span> C:\Users\dongkhoa
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Tải <code class="docutils literal notranslate"><span class="pre">Zephyr</span> <span class="pre">SDK</span></code>:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.5/zephyr-sdk-0.16.5_windows-x86_64.7z
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Giải nén <code class="docutils literal notranslate"><span class="pre">Zephyr</span> <span class="pre">SDK</span></code>:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>7z x zephyr-sdk-0.16.5_windows-x86_64.7z
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Chạy file setup <code class="docutils literal notranslate"><span class="pre">Zephyr</span> <span class="pre">SDK</span></code>:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="k">cd</span> zephyr-sdk-0.16.5
+setup.cmd
+</pre></div>
+</div>
+</section>
+<section id="buoc-4-build-mot-project-sample">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Bước 4: Build một project sample</a><a class="headerlink" href="#buoc-4-build-mot-project-sample" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Trở về thư mục <em>Project</em>:</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Ghi chú</p>
+<p>Lưu ý phải ở trạng thái .venv</p>
+</div>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>.venv<span class="p">)</span> C:\User\dongkhoa\zephyrproject\zephyr
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Chọn một project sample:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="k">cd</span> ./samples/basic/blinky
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Chọn Board để build:</p></li>
+</ul>
+<p><strong>Các board mà zephyr hổ trợ:</strong> <a class="reference external" href="https://docs.zephyrproject.org/latest/boards/index.html#boards">Supported Boards</a>.</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>west build -p always -b <span class="p">&lt;</span>your-board-name&gt;
+</pre></div>
+</div>
+<p><strong>Example: nếu bạn sử dụng board:</strong> <code class="docutils literal notranslate"><span class="pre">STM32F746G_DISCO</span></code> thì ghi như sau:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>west build -p always -b stm32f746g_disco
+</pre></div>
+</div>
+<p><strong>Nếu bạn thêm lệnh</strong> <code class="docutils literal notranslate"><span class="pre">set(BOARD</span> <span class="pre">&lt;your-board-name&gt;)</span></code> <strong>trong file CMakeLists.txt trong project thì chỉ cần ghi:</strong> <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">build</span></code></p>
+<ul class="simple">
+<li><p>Nạp vào board:</p></li>
+</ul>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>west flash
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ubuntu/index.html" class="btn btn-neutral float-left" title="Ubuntu" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../2.introduction/index.html" class="btn btn-neutral float-right" title="Giới thiệu" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bao Bui.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
