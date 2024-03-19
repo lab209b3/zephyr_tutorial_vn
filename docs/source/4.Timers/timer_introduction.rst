@@ -98,11 +98,4 @@ Ngoài ra, một bộ timer có thể được xác định và khởi tạo t�
     #include <zephyr.h>
     K_TIMER_DEFINE(my_timer, my_expiry_function, NULL);
 
-Sử dụng hàm Timer Expiry
-========================
-
-Đoạn code sau sử dụng timer để thực hiện một hành động không theo chu kì bình thường. Một khi công việc được yêu cầu không thể hoàn thành tại một level ngắt, hàm hết hạn (expriry function) của timer một 
-
-
-
 

@@ -1,5 +1,5 @@
-Lesson 4: Timers
-=================
+Timers
+======
 
 .. toctree::
    :maxdepth: 6
