@@ -125,11 +125,16 @@ thiết lập các #define cho led và button để tiện sử dụng sau này.
 
     gpio_pin_toggle_dt(&led);// thay đổi mức logic của led
 
+7. Bài tập ứng dụng
+~~~~~~~~~~~~~~~~~~~~
 
+* Bài 1: Tạo một blinkled trên board stm32f103
+* Bài 2: Tạo nút nhấn giữ để sáng led
+* Bài 3: Tạp nút nhấn bật tắt led sử dụng chống rung
 
+.. note:: 
 
-
-
+    `Các code của bài tập trên nằm ở mục Exercise <https://github.com/lab209b3/zephyr_tutorial_vn/tree/414689d2aaf0e78245b1bf9278ec5f5b23e4b87d/Exercise/3.GPIO>`_
 
 
 
