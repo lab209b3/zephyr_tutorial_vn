@@ -53,6 +53,12 @@ Cắm St-link vào máy và kiểm tra theo lệnh và cho ra như hình bên d�
 5.Tạo folder .vscode để debug
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. note:: 
+
+    Một folder ``.vscode`` chỉ sử dụng cho một folder project duy nhấT
+
+.. image:: arg1
+
 Tạo file setting.json trong folder với nội dung sau, sửa ``ryan`` theo user trên máy của mình.
 
 .. code-block:: json
