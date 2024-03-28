@@ -1,0 +1,20 @@
+/ {
+	leds {
+		red_led: led_1 {
+			gpios = <&gpioa 8 GPIO_ACTIVE_HIGH>;
+			label = "LD1";
+		};
+	};
+
+	buttons {
+		compatible = "gpio-keys";
+		button0: button_0 {
+			gpios = <&gpioa 1 (GPIO_PULL_UP | GPIO_ACTIVE_HIGH)>;
+			label = "User button";
+		};
+	};
+	aliases {
+		sw0 = &button0;
+		led1 = &red_led;
+	};
+};    
