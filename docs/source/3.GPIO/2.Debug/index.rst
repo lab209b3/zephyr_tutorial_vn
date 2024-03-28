@@ -5,14 +5,14 @@ DEBUG
     :local:
     :depth: 2
 
-1.Cài đặt compiler cho stm32
+1. Cài đặt compiler cho stm32
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: 
 
     sudo apt-get install git build-essential gcc-arm-none-eabi libtool libusb-1.0.0 libusb-1.0-0-dev gdb-multiarch 
 
-2.Cài đặt openOCD
+2. Cài đặt openOCD
 ~~~~~~~~~~~~~~~~~
 
 .. code-block:: 
@@ -26,7 +26,7 @@ DEBUG
     ./configure --prefix=/usr/local/ --enable-ftdi --enable-stlink
     sudo make install
 
-3.Cài các extension
+3. Cài các extension
 ~~~~~~~~~~~~~~~~~~~
 
 .. image:: ../Image/cc++.png
@@ -35,7 +35,7 @@ DEBUG
 .. image:: ../Image/serialmonitor.png
 
 
-4.Cài St-link
+4. Cài St-link
 ~~~~~~~~~~~~~
 
 .. code-block:: 
@@ -50,16 +50,16 @@ Cắm St-link vào máy và kiểm tra theo lệnh và cho ra như hình bên d�
 
 .. image:: ../Image/stlinkinfo.png
 
-5.Tạo folder .vscode để debug
+5. Tạo folder .vscode để debug
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note:: 
 
     Một folder ``.vscode`` chỉ sử dụng cho một folder project duy nhấT
 
-.. image:: arg1
+.. image:: ../Image/project.png
 
-Tạo file setting.json trong folder với nội dung sau, sửa ``ryan`` theo user trên máy của mình.
+* **Tạo file setting.json trong folder với nội dung sau, sửa ``ryan`` theo user trên máy của mình.**
 
 .. code-block:: json
 
@@ -72,7 +72,11 @@ Tạo file setting.json trong folder với nội dung sau, sửa ``ryan`` theo u
     }
     }
 
-Tạo file launch.json trong folder với nội dung sau, sửa ``ryan`` theo user trên máy của mình.
+* **Tạo file launch.json trong folder với nội dung sau, sửa ``ryan`` theo user trên máy của mình.**
+
+.. note::
+
+    Nếu sử dụng board khác stm32_min_dev thì vào thư mục support của board đó và copy đường dẫn ``openocd.cfg`` thay vào ``configFiles`` ở trên.
 
 .. code-block:: 
 
@@ -97,7 +101,36 @@ Tạo file launch.json trong folder với nội dung sau, sửa ``ryan`` theo us
     ]
     }
 
-.. note::
+6. Cách thực hiện debug
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Nếu sử dụng board khác stm32_min_dev thì vào thư mục support của board đó và copy đường dẫn ``openocd.cfg`` thay vào ``configFiles`` ở trên.
+.. note:: 
+    
+    Trước khi bắt đầu debug:
+
+    * Cắm st-link vào máy
+    * Thực hiện build project 
+
+
+* **Nhấn vào biểu tượng debug ở thanh bên trái**
+
+.. image:: ../Image/debugbutton.png
+
+* **Nhấn nút debug màu xanh để debug với OpenOCD**
+
+.. image:: ../Image/pressdebug.png
+
+* **Thanh công cụ**
+
+.. image:: ../Image/thanhcongcu.png
+
+* **Đặt breakpoint (thông thường ta đặt breakpoint để nhảy tới vị trí ta cần kiểm tra để đẩy nhanh quá trình debug, chủ yếu là các hàm callback của ngắt)**
+Click chuột phải và chọn ``Add Breakpoint``. Muốn remove ta cũng click chuột phải và chọn ``Remove Breakpoint``.
+
+.. image:: ../Image/addbp.png
+.. image:: ../Image/removebp.png
+
+* **Nơi theo dõi các biến và thanh ghi**
+
+.. image:: ../Image/var.png
 
